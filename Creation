@@ -1,0 +1,144 @@
+create database railway_management;
+
+use railway_management;
+
+
+
+CREATE TABLE users (
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role VARCHAR(255) NOT NULL,
+  PRIMARY KEY (username)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE TRAIN (
+    TRAIN_ID INT PRIMARY KEY,
+    TRAIN_NAME VARCHAR(100),
+    TRAIN_TYPE VARCHAR(255),
+    STATUS VARCHAR(20)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE STATION (
+    STATION_ID INT PRIMARY KEY,
+    STATION_NAME VARCHAR(100),
+    NO_OF_PLATFORMS INT,
+    PIN_CODE VARCHAR(10)
+);
+
+CREATE TABLE train_schedule (
+    train_id INT,
+    station_id INT,
+    DAY VARCHAR(255) NOT NULL,
+    arrival DATETIME NOT NULL,
+    departure DATETIME NOT NULL,
+    platform_number VARCHAR(10) NOT NULL,
+    PRIMARY KEY (train_id, station_id, DAY),  -- Composite primary key
+    FOREIGN KEY (train_id) REFERENCES train(train_id),
+    FOREIGN KEY (station_id) REFERENCES station(station_id)  -- Reference to station table
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE ticket (
+  `train_id` INT DEFAULT NULL,
+  `Ticket_Id` INT NOT NULL AUTO_INCREMENT,
+  `Boarding_Station` VARCHAR(100) DEFAULT NULL,
+  `Destination_Station` VARCHAR(100) DEFAULT NULL,
+  `Date_of_Journey` DATE DEFAULT NULL,
+  `Booking_Date` DATE DEFAULT NULL,
+  `Class` VARCHAR(50) DEFAULT NULL,
+  `username` VARCHAR(50) DEFAULT NULL,            -- New column for username
+  PRIMARY KEY (`Ticket_Id`),
+  KEY `train_id` (`train_id`),
+  CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`train_id`) REFERENCES `train` (`TRAIN_ID`),
+  CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`username`)  -- New foreign key constraint
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE COACH (
+    COACH_NO INT NOT NULL,                 -- Unique identifier for each coach
+    TRAIN_ID INT NOT NULL,                 -- Foreign key referencing TRAIN table
+    COACH_TYPE VARCHAR(50) CHECK (COACH_TYPE IN ('SLEEPER', 'AC', 'GENERAL')), -- Coach type with limited values
+    PRIMARY KEY (COACH_NO, TRAIN_ID),      -- Composite primary key (COACH_NO, TRAIN_ID)
+    CONSTRAINT FK_TRAIN FOREIGN KEY (TRAIN_ID)
+    REFERENCES TRAIN(TRAIN_ID)             -- Foreign key referencing TRAIN table
+);
+
+
+
+
+CREATE TABLE seat (
+    train_id INT NOT NULL,
+    coach_no INT NOT NULL,
+    seat_no INT NOT NULL, 
+    -- seat_type ENUM('lower', 'middle', 'upper', 'side_upper', 'side_lower') NOT NULL, 
+    seat_availability BOOLEAN NOT NULL,
+    DAY VARCHAR(255) NOT NULL,
+    PRIMARY KEY (train_id, coach_no, seat_no, DAY), -- Composite primary key
+    FOREIGN KEY (train_id) REFERENCES train(train_id),
+    FOREIGN KEY (coach_no) REFERENCES coach(coach_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
+CREATE TABLE passenger (
+  PASSENGER_ID INT NOT NULL AUTO_INCREMENT,
+  F_NAME VARCHAR(50) DEFAULT 'Unknown',
+  M_NAME VARCHAR(50) DEFAULT NULL,
+  L_NAME VARCHAR(50) DEFAULT 'Unknown',
+   AGE INT NOT NULL CHECK (AGE > 0),
+  GENDER VARCHAR(255) DEFAULT 'OTHER',
+ --  PASSWORD VARCHAR(50) DEFAULT 'password',
+  TICKET_ID INT DEFAULT NULL,
+  coach_no INT NOT NULL,
+  seat_no INT NOT NULL,
+  PRIMARY KEY (PASSENGER_ID),
+  KEY TICKET_ID (TICKET_ID),
+  CONSTRAINT passenger_ibfk_2 FOREIGN KEY (TICKET_ID) REFERENCES ticket (Ticket_Id)
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE FOOD_SERVICE (
+    FOOD_NAME VARCHAR(50) PRIMARY KEY,
+    PRICE DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE FOOD_ORDER (	
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    Ticket_id INT,
+    food_name VARCHAR(255),
+    quantity int,
+    FOREIGN KEY (Ticket_id) REFERENCES Ticket(Ticket_id),
+    FOREIGN KEY (food_name) REFERENCES FOOD_SERVICE(food_name)
+);
+
+
+CREATE TABLE EMPLOYEE (
+    EMPLOYEE_ID INT auto_increment PRIMARY KEY,                      -- Unique identifier for each employee
+	username varchar(50) NOT NULL,
+    TRAIN_ID INT,                                     -- Foreign key for TRAIN table
+    STATION_ID INT,                                   -- Foreign key for STATION table
+    F_NAME VARCHAR(50) NOT NULL,                      -- First name of the employee
+    M_NAME VARCHAR(50),                               -- Middle name of the employee
+    L_NAME VARCHAR(50) NOT NULL,                      -- Last name of the employee
+    GENDER VARCHAR(10) CHECK (GENDER IN ('MALE', 'FEMALE', 'OTHER')),  -- Gender
+    DOB DATE NOT NULL,                                -- Date of birth
+    DEPARTMENT VARCHAR(50),                           -- Department of the employee
+    PHONE_NO VARCHAR(15),                             -- Phone number
+    EMAIL VARCHAR(100) UNIQUE NOT NULL,              -- Email address
+    DATE_OF_JOINING DATE NOT NULL,                   -- Date of joining the organization
+    EMPLOYMENT_STATUS VARCHAR(20) CHECK (EMPLOYMENT_STATUS IN ('ACTIVE', 'INACTIVE', 'TERMINATED')), -- Employment status
+     UNIQUE KEY username (username),
+      CONSTRAINT FK_EMPLOYEE_TRAIN0 FOREIGN KEY (username)  -- Renamed foreign key
+    REFERENCES USERS(username),                       -- Assuming the TRAIN table has a TRAIN_ID column
+    PIN_CODE VARCHAR(10),                             -- Zip code
+    CONSTRAINT FK_EMPLOYEE_TRAIN FOREIGN KEY (TRAIN_ID)  -- Renamed foreign key
+    REFERENCES TRAIN(TRAIN_ID),                       -- Assuming the TRAIN table has a TRAIN_ID column
+    CONSTRAINT FK_EMPLOYEE_STATION FOREIGN KEY (STATION_ID)  -- Renamed foreign key
+    REFERENCES STATION(STATION_ID)                    -- Assuming the STATION table has a STATION_ID column
+);
+
