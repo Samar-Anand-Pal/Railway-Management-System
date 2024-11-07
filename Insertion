@@ -1,0 +1,201 @@
+-- Inserting data into TRAIN table
+use railway_management;
+INSERT INTO TRAIN (TRAIN_ID, TRAIN_NAME, TRAIN_TYPE, STATUS) VALUES
+(101, 'Rajdhani Express', 'superfast', 'Active'),
+(102, 'Shatabdi Express', 'superfast', 'Active'),
+(103, 'Maharajas Express', 'superfast', 'Active'), -- Changed to 'superfast'
+(104, 'Intercity Express', 'express', 'Active'),
+(105, 'Maharashtra Sampark Kranti', 'superfast', 'Active'), -- Changed to 'superfast'
+(106, 'Dadar to Latur', 'passenger', 'Active'),
+(107, 'Konkan Kanya Express', 'express', 'Inactive'),
+(108, 'Janshatabdi Express', 'express', 'Active');
+
+
+-- Inserting data into STATION table
+INSERT INTO STATION (STATION_ID, STATION_NAME, NO_OF_PLATFORMS, PIN_CODE) VALUES
+(1, 'Chhatrapati Shivaji Maharaj Terminus', 18, '400001'),
+(2, 'Dadar', 5, '400014'),
+(3, 'Kalyan', 9, '421301'),
+(4, 'Latur', 3, '413512'),
+(5, 'Mumbai Lokmanya Tilak', 10, '400070'),
+(6, 'Nashik', 4, '422001'),
+(7, 'Aurangabad', 6, '431001'),
+(8, 'Kolhapur', 5, '416001');
+
+-- Inserting data into train_schedule table
+-- Inserting train schedules for each train and each day of the week
+INSERT INTO train_schedule (train_id, station_id, DAY, arrival, departure, platform_number) VALUES
+-- Train 101
+(101, 1, 'MONDAY', '2024-11-06 08:00:00', '2024-11-06 08:30:00', '1'),
+(101, 2, 'MONDAY', '2024-11-06 09:00:00', '2024-11-06 09:30:00', '1'),
+(101, 3, 'MONDAY', '2024-11-06 10:00:00', '2024-11-06 10:30:00', '1'),
+(101, 4, 'MONDAY', '2024-11-06 11:00:00', '2024-11-06 11:30:00', '1'),
+(101, 5, 'MONDAY', '2024-11-06 12:00:00', '2024-11-06 12:30:00', '1'),
+
+(101, 1, 'TUESDAY', '2024-11-07 08:00:00', '2024-11-07 08:30:00', '1'),
+(101, 2, 'TUESDAY', '2024-11-07 09:00:00', '2024-11-07 09:30:00', '1'),
+(101, 3, 'TUESDAY', '2024-11-07 10:00:00', '2024-11-07 10:30:00', '1'),
+(101, 4, 'TUESDAY', '2024-11-07 11:00:00', '2024-11-07 11:30:00', '1'),
+(101, 5, 'TUESDAY', '2024-11-07 12:00:00', '2024-11-07 12:30:00', '1'),
+
+-- Train 102
+(102, 2, 'MONDAY', '2024-11-06 08:15:00', '2024-11-06 08:45:00', '2'),
+(102, 3, 'MONDAY', '2024-11-06 09:15:00', '2024-11-06 09:45:00', '2'),
+(102, 4, 'MONDAY', '2024-11-06 10:15:00', '2024-11-06 10:45:00', '2'),
+(102, 5, 'MONDAY', '2024-11-06 11:15:00', '2024-11-06 11:45:00', '2'),
+(102, 6, 'MONDAY', '2024-11-06 12:15:00', '2024-11-06 12:45:00', '2'),
+
+(102, 2, 'TUESDAY', '2024-11-07 08:15:00', '2024-11-07 08:45:00', '2'),
+(102, 3, 'TUESDAY', '2024-11-07 09:15:00', '2024-11-07 09:45:00', '2'),
+(102, 4, 'TUESDAY', '2024-11-07 10:15:00', '2024-11-07 10:45:00', '2'),
+(102, 5, 'TUESDAY', '2024-11-07 11:15:00', '2024-11-07 11:45:00', '2'),
+(102, 6, 'TUESDAY', '2024-11-07 12:15:00', '2024-11-07 12:45:00', '2'),
+
+-- Train 103
+(103, 3, 'MONDAY', '2024-11-06 08:30:00', '2024-11-06 09:00:00', '3'),
+(103, 4, 'MONDAY', '2024-11-06 09:30:00', '2024-11-06 10:00:00', '3'),
+(103, 5, 'MONDAY', '2024-11-06 10:30:00', '2024-11-06 11:00:00', '3'),
+(103, 6, 'MONDAY', '2024-11-06 11:30:00', '2024-11-06 12:00:00', '3'),
+(103, 7, 'MONDAY', '2024-11-06 12:30:00', '2024-11-06 13:00:00', '3'),
+
+(103, 3, 'TUESDAY', '2024-11-07 08:30:00', '2024-11-07 09:00:00', '3'),
+(103, 4, 'TUESDAY', '2024-11-07 09:30:00', '2024-11-07 10:00:00', '3'),
+(103, 5, 'TUESDAY', '2024-11-07 10:30:00', '2024-11-07 11:00:00', '3'),
+(103, 6, 'TUESDAY', '2024-11-07 11:30:00', '2024-11-07 12:00:00', '3'),
+(103, 7, 'TUESDAY', '2024-11-07 12:30:00', '2024-11-07 13:00:00', '3'),
+
+-- Train 104
+(104, 4, 'MONDAY', '2024-11-06 09:00:00', '2024-11-06 09:30:00', '4'),
+(104, 5, 'MONDAY', '2024-11-06 10:00:00', '2024-11-06 10:30:00', '4'),
+(104, 6, 'MONDAY', '2024-11-06 11:00:00', '2024-11-06 11:30:00', '4'),
+(104, 7, 'MONDAY', '2024-11-06 12:00:00', '2024-11-06 12:30:00', '4'),
+(104, 8, 'MONDAY', '2024-11-06 13:00:00', '2024-11-06 13:30:00', '4'),
+
+(104, 4, 'TUESDAY', '2024-11-07 09:00:00', '2024-11-07 09:30:00', '4'),
+(104, 5, 'TUESDAY', '2024-11-07 10:00:00', '2024-11-07 10:30:00', '4'),
+(104, 6, 'TUESDAY', '2024-11-07 11:00:00', '2024-11-07 11:30:00', '4'),
+(104, 7, 'TUESDAY', '2024-11-07 12:00:00', '2024-11-07 12:30:00', '4'),
+(104, 8, 'TUESDAY', '2024-11-07 13:00:00', '2024-11-07 13:30:00', '4'),
+
+-- Train 105
+(105, 5, 'MONDAY', '2024-11-06 09:30:00', '2024-11-06 10:00:00', '5'),
+(105, 6, 'MONDAY', '2024-11-06 10:30:00', '2024-11-06 11:00:00', '5'),
+(105, 7, 'MONDAY', '2024-11-06 11:30:00', '2024-11-06 12:00:00', '5'),
+(105, 8, 'MONDAY', '2024-11-06 12:30:00', '2024-11-06 13:00:00', '5'),
+
+(105, 5, 'TUESDAY', '2024-11-07 09:30:00', '2024-11-07 10:00:00', '5'),
+(105, 6, 'TUESDAY', '2024-11-07 10:30:00', '2024-11-07 11:00:00', '5'),
+(105, 7, 'TUESDAY', '2024-11-07 11:30:00', '2024-11-07 12:00:00', '5'),
+(105, 8, 'TUESDAY', '2024-11-07 12:30:00', '2024-11-07 13:00:00', '5'),
+
+-- Train 106
+(106, 6, 'MONDAY', '2024-11-06 10:00:00', '2024-11-06 10:30:00', '6'),
+(106, 7, 'MONDAY', '2024-11-06 11:00:00', '2024-11-06 11:30:00', '6'),
+(106, 8, 'MONDAY', '2024-11-06 12:00:00', '2024-11-06 12:30:00', '6'),
+
+(106, 6, 'TUESDAY', '2024-11-07 10:00:00', '2024-11-07 10:30:00', '6'),
+(106, 7, 'TUESDAY', '2024-11-07 11:00:00', '2024-11-07 11:30:00', '6'),
+(106, 8, 'TUESDAY', '2024-11-07 12:00:00', '2024-11-07 12:30:00', '6'),
+
+-- Train 107
+(107, 7, 'MONDAY', '2024-11-06 08:45:00', '2024-11-06 09:15:00', '7'),
+(107, 8, 'MONDAY', '2024-11-06 09:45:00', '2024-11-06 10:15:00', '7'),
+
+(107, 7, 'TUESDAY', '2024-11-07 08:45:00', '2024-11-07 09:15:00', '7'),
+(107, 8, 'TUESDAY', '2024-11-07 09:45:00', '2024-11-07 10:15:00', '7'),
+
+-- Train 108
+(108, 1, 'MONDAY', '2024-11-06 07:30:00', '2024-11-06 08:00:00', '8'),
+(108, 2, 'MONDAY', '2024-11-06 08:15:00', '2024-11-06 08:45:00', '8'),
+
+(108, 1, 'TUESDAY', '2024-11-07 07:30:00', '2024-11-07 08:00:00', '8'),
+(108, 2, 'TUESDAY', '2024-11-07 08:15:00', '2024-11-07 08:45:00', '8');
+
+
+-- Inserting data into TICKET table
+INSERT INTO TICKET (train_id, Boarding_Station, Destination_Station, Date_of_Journey, Booking_Date, Class) VALUES
+(101, 'Chhatrapati Shivaji Maharaj Terminus', 'Kalyan', '2024-11-03', '2024-11-01', 'Sleeper'),
+(102, 'Dadar', 'Mumbai Lokmanya Tilak', '2024-11-04', '2024-11-02', 'AC'),
+(103, 'Mumbai Lokmanya Tilak', 'Aurangabad', '2024-11-05', '2024-11-03', 'General'),
+(104, 'Dadar', 'Nashik', '2024-11-06', '2024-11-04', 'Sleeper');
+
+-- Inserting data into COACH table
+-- Inserting 3 coaches for each train
+INSERT INTO COACH (COACH_NO, TRAIN_ID, COACH_TYPE) VALUES
+(1, 101, 'SLEEPER'),
+(2, 101, 'AC'),
+(3, 101, 'GENERAL'),
+(1, 102, 'SLEEPER'),
+(2, 102, 'AC'),
+(3, 102, 'GENERAL'),
+(1, 103, 'SLEEPER'),
+(2, 103, 'AC'),
+(3, 103, 'GENERAL'),
+(1, 104, 'SLEEPER'),
+(2, 104, 'AC'),
+(3, 104, 'GENERAL'),
+(1, 105, 'SLEEPER'),
+(2, 105, 'AC'),
+(3, 105, 'GENERAL'),
+(1, 106, 'SLEEPER'),
+(2, 106, 'AC'),
+(3, 106, 'GENERAL'),
+(1, 107, 'SLEEPER'),
+(2, 107, 'AC'),
+(3, 107, 'GENERAL'),
+(1, 108, 'SLEEPER'),
+(2, 108, 'AC'),
+(3, 108, 'GENERAL');
+
+INSERT INTO FOOD_SERVICE (FOOD_NAME, PRICE) VALUES
+('Veg Thali', 150.00),
+('Non-Veg Thali', 250.00),
+('Cold Drink', 30.00),
+('Tea', 10.00);
+
+INSERT INTO users (username, password, role) VALUES
+('john_doe', 'password123', 'employee'),
+('jane_doe', 'password123', 'employee'),
+('rohit', 'password123', 'employee'),
+('anuj', 'password123', 'employee');
+
+INSERT INTO EMPLOYEE (username, TRAIN_ID, STATION_ID, F_NAME, M_NAME, L_NAME, GENDER, DOB, DEPARTMENT, PHONE_NO, EMAIL, DATE_OF_JOINING, EMPLOYMENT_STATUS, PIN_CODE) VALUES
+('john_doe', 101, 1, 'John', NULL, 'Doe', 'MALE', '1985-06-15', 'Operations', '9876543210', 'john@example.com', '2020-01-10', 'ACTIVE', '400001'),
+('jane_doe', 102, 2, 'Jane', NULL, 'Doe', 'FEMALE', '1990-07-20', 'Ticketing', '9876543211', 'jane@example.com', '2021-02-15', 'ACTIVE', '400014'),
+('rohit', 103, 3, 'Rohit', 'K', 'Singh', 'MALE', '1992-08-30', 'Maintenance', '9876543212', 'rohit@example.com', '2019-03-22', 'ACTIVE', '421301'),
+('anuj', 104, 4, 'Anuj', 'K', 'Patel', 'MALE', '1988-09-10', 'Cleaning', '9876543213', 'anuj@example.com', '2022-05-11', 'ACTIVE', '413512');
+
+
+
+SET @i = 0;
+
+-- Initialize the seat counter variable
+SET @i = 0;
+SET @seats_per_coach = 50; -- Maximum seats per coach
+SET @coaches_per_train = 3; -- Number of coaches per train
+
+-- Insert seats into the seat table
+INSERT INTO seat (train_id, coach_no, seat_no, seat_availability, DAY)
+SELECT 
+    t.train_id, 
+    c.coach_no, 
+    (@i := @i + 1) AS seat_no, 
+    TRUE AS seat_availability,
+    'MONDAY' AS DAY -- Assuming availability on Monday
+FROM 
+    (SELECT DISTINCT train_id FROM train) AS t
+JOIN 
+    (SELECT DISTINCT train_id, coach_no FROM coach WHERE coach_no <= @coaches_per_train) AS c ON t.train_id = c.train_id
+JOIN 
+    (SELECT NULL AS seat_stub FROM (
+        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 
+        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 
+        UNION ALL SELECT 9 UNION ALL SELECT 10) x,
+        (SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 
+        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 
+        UNION ALL SELECT 9 UNION ALL SELECT 10) y
+    ) s_stub
+WHERE 
+    @i < @seats_per_coach * @coaches_per_train -- Limit to total seats per train
+
+ORDER BY t.train_id, c.coach_no; -- Order by train and coach
