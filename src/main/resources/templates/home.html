@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Management System</title>
+
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a,
+        .navbar button {
+            color: #fff;
+            margin-left: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .navbar a:hover,
+        .navbar button:hover {
+            color: #f39c12;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/train1.jpg') center/cover no-repeat;
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 1.5px;
+            animation: fadeInDown 0.8s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .book-btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #f39c12;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .book-btn:hover {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Content Section */
+        .content {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #ecf0f1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 50px 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            animation: fadeIn 0.9s ease-in-out;
+        }
+
+        .faq-item {
+            margin: 20px 0;
+            text-align: left;
+            max-width: 650px;
+            margin: 0 auto;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .faq-item h3 {
+            cursor: pointer;
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 15px;
+            transition: background-color 0.3s;
+            border: 1px solid transparent;
+            border-radius: 5px;
+        }
+
+        .faq-item h3:hover {
+            background-color: #f39c12;
+        }
+
+        .faq-item p {
+            display: none;
+            padding: 15px;
+            border: 1px solid #2c3e50;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #e67e22;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .book-btn {
+                font-size: 1rem;
+            }
+
+            .content h2 {
+                font-size: 2rem;
+            }
+
+            .faq h2 {
+                font-size: 2rem;
+            }
+        }
+        * Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            background-color: rgba(44, 62, 80, 0.9); /* Added transparency */
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative; /* Position for potential overlap */
+            z-index: 10; /* Ensure navbar is above other content */
+        }
+
+        /* .navbar a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        } */
+
+        /* .navbar a:hover {
+            color: #f39c12;
+        } */
+        .bir{
+            margin-right:1400px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>
+
+            <a href="/home" class="bir">Bharat Rail</a>
+        </div>
+        <a href="/mybooking">Booking</a>
+        <a href="/home">Home</a>
+        <a href="/train-enquiry">Train Enquiry</a>
+        <form th:action="@{/logout}" method="post" >
+            <button type="submit">Logout</button>
+        </form>
+
+    </div>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to Railway Management System</h1>
+        <p>Book your train tickets easily and efficiently.</p>
+        <a href="/book-ticket" class="book-btn">Book Ticket</a>
+        <div class="center">
+            <div th:if="${role.contains('ADMIN')}">
+                <p>Welcome Admin! You can manage users and the system.</p>
+            </div>
+            <div th:if="${role.contains('EMPLOYEE')}">
+                <p>Welcome Employee! You can view employee-related information.</p>
+            </div>
+            <div th:if="${role.contains('USER')}">
+                <p>Welcome User! You can book tickets and view available services.</p>
+            </div>
+            <div th:if="${role.contains('ROLE_ADMIN')}">
+                <button class="book-btn" onclick="window.location.href='/admin-login'">Admin Dashboard</button>
+            </div>
+            <div th:if="${role.contains('ROLE_employee')}">
+                <button class="book-btn" onclick="window.location.href='/employee-login'">Employee Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>Our Services</h2>
+        <p>Find your route, book your tickets, and experience seamless train journeys with our efficient system.</p>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq">
+        <h2>Frequently Asked Questions (FAQs)</h2>
+        <div class="faq-item">
+            <h3 onclick="toggleFAQ(this)">What is the Railway Management System?</h3>
+            <p>The Railway Management System is a platform that allows users to book train tickets, find routes, and manage their travel plans efficiently.</p>
+        </div>
+        <div class="faq-item">
+            <h3 onclick="toggleFAQ(this)">How can I book a ticket?</h3>
+            <p>Click on the "Book Ticket" button on the home page, choose your route, fill in the details, and confirm your booking.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{base :: footer}"></div>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
+</body>
+</html>

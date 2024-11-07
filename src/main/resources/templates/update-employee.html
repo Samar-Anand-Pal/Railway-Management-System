@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Optionally, include CSS framework like Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   
+
+    <div class="container mt-4">
+        <h1>Admin Dashboard</h1>
+
+        <!-- Form for updating employee details -->
+        <form id="addEmployeeForm" th:action="@{/update-employee}" method="POST">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" class="form-control" placeholder="First Name" th:value="${emp.firstName}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="middleName">Middle Name</label>
+                <input type="text" name="middleName" class="form-control" placeholder="Middle Name" th:value="${emp.middleName}">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" class="form-control" placeholder="Last Name" required th:value="${emp.lastName}">
+            </div>
+
+           
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select name="gender" class="form-control" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male" th:selected="${emp.gender == 'MALE'}">Male</option>
+                    <option value="Female" th:selected="${emp.gender == 'FEMALE'}">Female</option>
+                    <option value="Other" th:selected="${emp.gender == 'OTHERSr'}">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" name="dob" class="form-control" placeholder="Date of Birth" th:value="${emp.dob}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" name="department" class="form-control" placeholder="Department" th:value="${emp.department}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Username" required th:value="${usern}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNo">Phone Number</label>
+                <input type="text" name="phoneNo" class="form-control" placeholder="Phone Number"th:value="${emp.phoneNo}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email" th:value="${emp.email}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfJoining">Date of Joining</label>
+                <input type="date" name="dateOfJoining" class="form-control" placeholder="Date of Joining" th:value="${emp.dateOfJoining}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="zipCode">Zip Code</label>
+                <input type="text" name="zipCode" class="form-control" placeholder="Zip Code" th:value="${emp.zipCode}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="trainId">Train ID</label>
+                <input type="number" name="trainId" class="form-control" placeholder="Train ID" th:value="${emp.trainId}" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="stationId">Station ID</label>
+                <input type="number" name="stationId" class="form-control" placeholder="Station ID" th:value="${emp.stationId}" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="employmentStatus">Employment Status</label>
+                <select name="employmentStatus" class="form-control" required>
+                    <option value="">Select Employment Status</option>
+                    <option value="Active" th:selected="${emp.employmentStatus == 'ACTIVE'}">Active</option>
+                    <option value="Terminated" th:selected="${emp.employmentStatus == 'TERMINATED'}">Terminated</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Employee</button>
+        </form>
+    </div>
+    <!-- Optionally include JavaScript files for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

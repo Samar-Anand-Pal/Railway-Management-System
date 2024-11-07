@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bharat Rail</title>
+  </head>
+  <style>
+    /* Global styling */
+  
+
+    /* Navbar styling */
+    .navbar {
+        display: flex;
+        justify-content: flex-end;
+        background-color: rgba(44, 62, 80, 0.9); /* Added transparency */
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative; /* Position for potential overlap */
+        z-index: 10; /* Ensure navbar is above other content */
+    }
+
+    .navbar a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+        color: #f39c12;
+    }
+
+
+    .bir{
+        margin-right:1400px;
+    }
+</style>
+  <body>
+    <!-- Navbar Section -->
+    <header th:fragment="navbar" >
+        <div class="navbar">
+            <div>
+    
+                <a href="/home" class="bir">Bharat Rail</a>
+            </div>
+            <a href="/MyBooking">Booking</a>
+            <a href="/home">Home</a>
+            <a href="/train-enquiry">Train Enquiry</a>
+            <form th:action="@{/logout}" method="post" >
+                <button type="submit">Logout</button>
+            </form>
+    
+        </div>
+    </header>
+
+    <!-- Footer Section -->
+    <footer th:fragment="footer" class="footer">
+      <h3>Railway Management System</h3>
+      <p>&copy; 2024 Railway Management System. All Rights Reserved.</p>
+      <a href="/privacy-policy">Privacy Policy</a> |
+      <a href="/contact">Contact Us</a>
+    </footer>
+  </body>
+</html>

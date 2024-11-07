@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <style>
+        /* Reset default styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #c8e0e6, #e7f0f3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Centered container for login form */
+        .login-container {
+            background-color: #ffffff;
+            width: 400px;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Header styling */
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            color: #3f51b5;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        /* Form input styling */
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #333;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #3f51b5;
+            outline: none;
+        }
+
+        /* Button styling */
+        .login-btn {
+            background-color: #3f51b5;
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #5c6bc0;
+            transform: translateY(-2px);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #d9534f;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        
+        <form th:action="@{/admin-login}"  method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        
+        <!-- Display an error message if login fails -->
+        <div th:if="${error}" class="error-message">
+            <p>Invalid username or password. Please try again.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ticket</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            background: url('C:/Users/samar/OneDrive - Indian Institute of Technology (BHU), Varanasi/Desktop/railway_management/railway_management/src/main/resources/static/images/train2.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            background-color: rgba(44, 62, 80, 0.9); /* Added transparency */
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative; /* Position for potential overlap */
+            z-index: 10; /* Ensure navbar is above other content */
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #f39c12;
+        }
+        .bir{
+            margin-right:1400px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto; /* Centered margin with spacing from top and bottom */
+            background: rgba(255, 255, 255, 0.9); /* Light background for form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #c44618;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: rgba(44, 62, 80, 0.9); /* Added transparency */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #e67e22;
+        }
+        
+    </style>
+
+    <script>
+        // Function to set the date input field to a range of 7 days from the current date
+        window.onload = function() {
+            const today = new Date();
+            const nextWeek = new Date(today);
+            nextWeek.setDate(today.getDate() + 6);
+
+            const todayString = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+            const nextWeekString = nextWeek.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+
+            const dateInput = document.getElementById('date');
+            dateInput.setAttribute('min', todayString); // Set minimum date to today
+            dateInput.setAttribute('max', nextWeekString); // Set maximum date to 7 days from today
+        }
+    </script>
+</head>
+<body>
+    <!-- <div th:replace="~{base :: navbar}"></div> -->
+    <!-- Navigation Bar -->
+    <!-- <div class="navbar">
+        <div>
+
+            <a href="/home" class="bir">Bharat Rail</a>
+        </div>
+        <a href="/MyBooking">Booking</a>
+        <a href="/home">Home</a>
+        <a href="/train-enquiry">Train Enquiry</a>
+        <form th:action="@{/logout}" method="post" >
+            <button type="submit">Logout</button>
+        </form>
+
+    </div> -->
+
+    <div class="container">
+        <h1>Book Ticket</h1>
+        <form th:action="@{/book-ticket}" method="POST">  <!-- Specify action for form submission -->
+            <div class="form-group">
+                <label for="from">From</label>
+                <input type="text" id="from" value="1" name="from" required>
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <input type="text" id="to" value="2" name="to" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" value="2024-10-28" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="class">Class</label>
+                <select id="class" name="trainClass">  <!-- Adjusted name to match your controller -->
+                    <option value="general">General</option>
+                    <option value="sleeper">Sleeper</option>
+                    <option value="ac">AC</option>
+                </select>
+            </div>
+            <button type="submit">Search</button> <!-- This submits the form -->
+        </form>
+    </div>
+
+    <!-- Footer Section -->
+
+</body>
+</html>

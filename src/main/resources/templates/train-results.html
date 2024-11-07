@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .availability-button {
+            padding: 5px 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+        .availability-button[disabled] {
+            background-color: #d3d3d3;
+            cursor: not-allowed;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .back-button:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Train Search Results</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Train Name</th>
+                    <th>Train Type</th>
+                    <th>Status</th>
+                    <th>General</th>
+                    <th>Sleeper</th>
+                    <th>AC</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="train : ${train11}">
+                    <td th:text="${train.t.trainName}"></td>
+                    <td th:text="${train.t.trainType}"></td>
+                    <td th:text="${train.t.status}"></td>
+                    <td th:text="${train.generalSeats}"></td>
+                    <td th:text="${train.sleeperSeats}"></td>
+                    <td th:text="${train.acSeats}"></td>
+                    <td>
+                        <a th:href="@{/Ticket-form(trainId=${train.t.trainId}, class='General',from=${from},to=${to},date=${date},maxSeats=${train.generalSeats})}" 
+                           class="availability-button" 
+                           th:disabled="${train.generalSeats == 0}">
+                           General
+                        </a>
+                        <a th:href="@{/Ticket-form(trainId=${train.t.trainId}, class='Sleeper',from=${from},to=${to},date=${date},maxSeats=${train.sleeperSeats})}" 
+                           class="availability-button" 
+                           th:disabled="${train.sleeperSeats == 0}">
+                           Sleeper
+                        </a>
+                        <a th:href="@{/Ticket-form(trainId=${train.t.trainId}, class='AC',from=${from},to=${to},date=${date},maxSeats=${train.acSeats})}" 
+                           class="availability-button" 
+                           th:disabled="${train.acSeats == 0}">
+                           AC
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/book-ticket" class="back-button">Back to Search</a>
+    </div>
+</body>
+</html>
