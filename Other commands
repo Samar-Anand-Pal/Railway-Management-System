@@ -1,0 +1,12 @@
+-- Disable safe updates
+SET SQL_SAFE_UPDATES = 0;
+
+-- Disable foreign key checks (if necessary)
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Re-enable foreign key checks
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Re-enable safe updates (optional)
+SET SQL_SAFE_UPDATES = 1;
+
