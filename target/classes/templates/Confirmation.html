@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Confirmation</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            background-color: #f9fafb;
+            color: #4b4b4b;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main container styling */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+        }
+
+        /* Heading styling */
+        h1 {
+            color: #6a0dad; /* Purple */
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            color: #6a0dad; /* Purple */
+            font-size: 24px;
+            margin: 30px 0 20px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+            color: #4a4a4a;
+        }
+
+        th {
+            background-color: #6a0dad; /* Purple */
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Food order form styling */
+        .food-item-list {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .food-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            color: #4b4b4b;
+            width: 100%;
+        }
+
+        .food-item label {
+            width: 40%;
+            text-align: left;
+        }
+
+        .food-item input[type="number"] {
+            width: 15%;
+            padding: 8px;
+            border: 1px solid #d1d9e0;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .food-item span.price {
+            width: 20%;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Total price styling */
+        .total-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6a0dad; /* Purple */
+            margin-top: 30px;
+        }
+
+        /* Button styling */
+        .order-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: #6a0dad; /* Purple */
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button:hover {
+            background-color: #5a0c9e; /* Darker Purple */
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .food-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .food-item input[type="number"] {
+                width: 100%;
+                margin-top: 5px;
+            }
+
+            .food-item span.price {
+                width: auto;
+                text-align: left;
+            }
+        }
+    </style>
+    <script>
+        function calculateTotal() {
+            let totalPrice = 0;
+            const rows = document.querySelectorAll(".food-item");
+
+            rows.forEach(row => {
+                const price = parseFloat(row.querySelector(".price").innerText.replace('₹', ''));
+                const quantity = parseInt(row.querySelector(".quantity").value) || 0;
+                totalPrice += price * quantity;
+            });
+
+            document.getElementById("totalPrice").innerText = 'Total: ₹' + totalPrice.toFixed(2);
+            document.getElementById("totalPriceInput").value = totalPrice.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+   
+
+    <div class="container">
+        <h1>Ticket Confirmation</h1>
+
+        <!-- Ticket Details -->
+        <h2>Ticket Details</h2>
+        <table>
+            <tr><th>From</th><td th:text="${ticket.boardingStation}"></td></tr>
+            <tr><th>To</th><td th:text="${ticket.destinationStation}"></td></tr>
+            <tr><th>Date of Journey</th><td th:text="${ticket.dateOfJourney}"></td></tr>
+            <tr><th>Class</th><td th:text="${ticket.ticketClass}"></td></tr>
+        </table>
+
+        <!-- Passenger List -->
+        <h2>Passenger List</h2>
+        <table>
+            <thead>
+                <tr><th>Passenger Name</th><th>Age</th><th>Gender</th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="passenger : ${passengers}">
+                    <td th:text="${passenger.firstName}"></td>
+                    <td th:text="${passenger.age}"></td>
+                    <td th:text="${passenger.gender}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Food Order Form -->
+        <h2>Food Order</h2>
+        <form th:action="@{/submitOrder}" method="post" onsubmit="calculateTotal()">
+            <div class="food-item-list">
+                <th:block th:each="item : ${fs}">
+                    <div class="food-item">
+                        <label th:text="${item.foodName}">Food Name</label>
+                        <input type="hidden" th:name="foodName" th:value="${item.foodName}" />
+                        <input type="number" class="quantity" th:name="quantity" placeholder="Quantity" min="0" value="0" oninput="calculateTotal()" />
+                        <span class="price" th:text="'₹' + ${item.price}">Price</span>
+                    </div>
+                </th:block>
+            </div>
+
+            <!-- Display total price -->
+            <div class="total-price" id="totalPrice">Total: ₹0.00</div>
+
+            <!-- Hidden field for Total Price -->
+            <input type="hidden" id="totalPriceInput" name="totalPrice" value="0.00" />
+
+            <!-- Submit button -->
+            <button type="submit" class="order-button">Submit Order</button>
+        </form>
+    </div>
+</body>
+</html>

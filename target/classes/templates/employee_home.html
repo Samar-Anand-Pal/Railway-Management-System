@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+            background-color: #f0f4f8; /* Soft light background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .home-container {
+            text-align: center;
+            background: #ffffff; /* White background for the container */
+            padding: 40px;
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            max-width: 600px;
+            width: 100%;
+            margin: 20px;
+            transition: transform 0.3s; /* Smooth hover effect */
+        }
+
+        .home-container:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        h1 {
+            color: #4a90e2; /* Calming blue color */
+            margin-bottom: 30px;
+            font-size: 26px; /* Slightly larger font size */
+            letter-spacing: 1px; /* Spacing for a more open feel */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px; /* Rounded corners for the table */
+            overflow: hidden; /* Prevents overflow for rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the table */
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s; /* Smooth background color transition */
+        }
+
+        th {
+            background-color: #4a90e2; /* Blue background for header */
+            color: white; /* White text for header */
+            font-weight: bold; /* Bold font for headers */
+        }
+
+        td {
+            background-color: #f9f9f9; /* Light grey for table rows */
+        }
+
+        tr:hover td {
+            background-color: #e0f7fa; /* Light cyan on hover */
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 22px; /* Adjust header size */
+            }
+
+            th, td {
+                padding: 12px; /* Adjust padding for smaller screens */
+            }
+        }
+
+        /* Additional styling for the table */
+        tr:nth-child(even) td {
+            background-color: #f2f2f2; /* Light grey for even rows */
+        }
+
+        /* Additional styling for spacing and aesthetics */
+        .welcome-message {
+            font-size: 20px; /* Slightly smaller font for welcome message */
+            color: #333; /* Darker color for better readability */
+            margin: 10px 0; /* Margin for spacing */
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="home-container">
+        <h1 th:text="'Welcome, ' + ${emp.firstName} + '!'"></h1>
+        <div class="welcome-message">Here's your employee information:</div>
+        <table>
+            <tr>
+                <th>Employee ID:</th>
+                <td><span th:text="${emp.employeeId}"></span></td>
+            </tr>
+            <tr>
+                <th>Train ID:</th>
+                <td><span th:text="${emp.username}"></span></td>
+            </tr>
+            <tr>
+                <th>Train ID:</th>
+                <td><span th:text="${emp.trainId}"></span></td>
+            </tr>
+            <tr>
+                <th>Station ID:</th>
+                <td><span th:text="${emp.stationId}"></span></td>
+            </tr>
+            <tr>
+                <th>First Name:</th>
+                <td><span th:text="${emp.firstName}"></span></td>
+            </tr>
+            <tr>
+                <th>Middle Name:</th>
+                <td><span th:text="${emp.middleName}"></span></td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td><span th:text="${emp.lastName}"></span></td>
+            </tr>
+            <tr>
+                <th>Gender:</th>
+                <td><span th:text="${emp.gender}"></span></td>
+            </tr>
+            <tr>
+                <th>Date of Birth:</th>
+                <td><span th:text="${#dates.format(emp.dob, 'dd-MM-yyyy')}"></span></td>
+            </tr>
+            <tr>
+                <th>Department:</th>
+                <td><span th:text="${emp.department}"></span></td>
+            </tr>
+            <tr>
+                <th>Phone Number:</th>
+                <td><span th:text="${emp.phoneNo}"></span></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td><span th:text="${emp.email}"></span></td>
+            </tr>
+            <tr>
+                <th>Date of Joining:</th>
+                <td><span th:text="${#dates.format(emp.dateOfJoining, 'dd-MM-yyyy')}"></span></td>
+            </tr>
+            
+            <tr>
+                <th>Employment Status:</th>
+                <td><span th:text="${emp.employmentStatus}"></span></td>
+            </tr>
+           
+            <tr>
+                <th>Zip Code:</th>
+                <td><span th:text="${emp.zipCode}"></span></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

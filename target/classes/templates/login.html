@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <style>
+        /* Reset and basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, rgba(35, 37, 42, 0.9), rgba(58, 71, 80, 0.9)), url('/images/login_image.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background 0.5s ease;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffbe0b;
+            margin-bottom: 25px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            color: #f9f9f9;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            font-size: 16px;
+            color: #fff;
+            outline: none;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: #ffbe0b;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 0;
+            background: linear-gradient(135deg, #FF4D4D, #FF6A00);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn img {
+            margin-left: 8px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            color: white;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #ffbe0b;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #FF6A00;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            background: rgba(255, 0, 0, 0.3);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .error-message {
+            background-color: rgba(255, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .logout-message {
+            background-color: rgba(40, 167, 69, 0.5);
+            color: #fff;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Make the page responsive */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+
+        <!-- Display error message if available -->
+        <div th:if="${param.error}" class="message error-message">
+            <p>Invalid username or password. Please try again.</p>
+        </div>
+
+        <!-- Display logout message if available -->
+        <div th:if="${param.logout}" class="message logout-message">
+            <p>You have been logged out successfully.</p>
+        </div>
+
+        <form th:action="@{/login}" method="POST" class="login-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn">
+                    Login
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/login-rounded-right.png" alt="Login Icon">
+                </button>
+            </div>
+        </form>
+
+        <div class="footer" >
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>
